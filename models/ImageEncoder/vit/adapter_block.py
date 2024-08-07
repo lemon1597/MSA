@@ -92,7 +92,7 @@ class AdapterBlock(nn.Module):
 
         x = self.norm1(x)
         x = self.attn(x)
-        x = self.Space_Adapter(x)
+        x = self.Space_Adapter(x) # new sam
 
         if self.args.thd:
             xd = rearrange(xd, 'b (hh ww) c -> b  hh ww c', hh= hh )
@@ -104,7 +104,7 @@ class AdapterBlock(nn.Module):
 
         x = shortcut + x
         xn = self.norm2(x)
-        x = x + self.mlp(xn) + self.scale * self.MLP_Adapter(xn)
+        x = x + self.mlp(xn) + self.scale * self.MLP_Adapter(xn) # new sam
         return x
 
 

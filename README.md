@@ -71,6 +71,8 @@ ISIC/
  change "data_path" and "exp_name" for your own useage. you can change "exp_name" to anything you want.
 
  You can descrease the ``image size`` or batch size ``b`` if out of memory.
+- train run ``-net sam -mod sam_adpt -exp_name msa_test_isic -sam_ckpt ./checkpoint/sam/sam_vit_b_01ec64.pth -image_size 1024 -b 1 -dataset isic -data_path E:/deeplearningprojects/codes/Medical-SAM-Adapter/data/isic``
+- test run ``-net sam -mod sam_adpt -exp_name msa_test_isic -sam_ckpt ./checkpoint/sam/sam_vit_b_01ec64.pth -weights ./checkpoint/sam/checkpoint_best.pth -image_size 1024 -b 1 -dataset isic -data_path E:/deeplearningprojects/codes/Medical-SAM-Adapter/data/isic -vis 50``
 
  3. Evaluation: The code can automatically evaluate the model on the test set during traing, set "--val_freq" to control how many epoches you want to evaluate once. You can also run val.py for the independent evaluation.
 

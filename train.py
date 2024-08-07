@@ -150,6 +150,7 @@ logger.info(args)
 #     nice_train_loader = DataLoader(refuge_train_dataset, batch_size=args.b, shuffle=True, num_workers=8, pin_memory=True)
 #     nice_test_loader = DataLoader(refuge_test_dataset, batch_size=args.b, shuffle=False, num_workers=8, pin_memory=True)
 #     '''end'''
+# 训练集 和 测试集
 nice_train_loader, nice_test_loader = get_dataloader(args)
 
 '''checkpoint path and tensorboard'''

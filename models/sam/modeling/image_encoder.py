@@ -76,7 +76,7 @@ class ImageEncoderViT(nn.Module):
             )
 
         self.blocks = nn.ModuleList()
-        if args.mod == 'sam_adpt':
+        if args.mod == 'sam_adpt': # new sam
             block_class = AdapterBlock 
         elif args.mod == 'sam_lora':
             block_class = LoraBlock 

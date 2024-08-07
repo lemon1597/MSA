@@ -4,6 +4,7 @@ author Junde
 """
 import os
 from datetime import datetime
+import time
 
 #CIFAR100 dataset path (python version)
 #CIFAR100_PATH = '/nfs/private/cifar100/cifar-100-python'
@@ -37,8 +38,8 @@ while i * 5 <= EPOCH:
 #INIT_LR = 0.1
 
 #time of we run the script
-TIME_NOW = datetime.now().isoformat()
-
+# TIME_NOW = datetime.now().isoformat()
+TIME_NOW = time.strftime("%Y-%m-%dT%H-%M-%S", time.localtime())
 #tensorboard log dir
 LOG_DIR = 'runs'
 

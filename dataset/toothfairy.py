@@ -1,7 +1,7 @@
 import os
 import pickle
 
-import nibabel as nib
+# import nibabel as nib
 import numpy as np
 import pandas as pd
 import torch
@@ -78,3 +78,35 @@ class ToothFairy(Dataset):
             'image_meta_dict':image_meta_dict,
         }
 
+
+# def test_get_item(data_path):
+#     # 假设args是一个包含所需参数的对象，这里我们使用字典来模拟
+#     args = {
+#         'image_size': 256,  # 假设的图像尺寸
+#         # 其他参数...
+#     }
+#
+#     # 实例化数据集类
+#     dataset = ToothFairy(args, data_path, mode='Training', prompt='click')
+#
+#     # 测试检索数据集中的第一个项目
+#     if len(dataset) > 0:
+#         item = dataset[0]
+#         print("Test item retrieved:")
+#         print(f"Image tensor shape: {item['image'].shape}")
+#         print(f"Mask tensor shape: {item['label'].shape}")
+#         print(f"Point label: {item['p_label']}")
+#         print(f"Points: {item['pt']}")
+#         print(f"Image metadata: {item['image_meta_dict']}")
+#     else:
+#         print("The dataset is empty.")
+#
+#     return item
+#
+# # 用于测试的主函数
+# def main():
+#     data_path = r'C:\Users\linmeng\Downloads\ToothFairy_Dataset'  # 替换为你的数据集路径
+#     test_get_item(data_path)
+#
+# if __name__ == "__main__":
+#     main()

@@ -1142,14 +1142,22 @@ def calculate_gradient_penalty(netD, real_images, fake_images):
     grad_penalty = ((gradients.norm(2, dim=1) - 1) ** 2).mean() * 10
     return grad_penalty
 
-
+# 这个函数的目的是确定在给定掩码中随机点击的位置。如果掩码中所有的值都是 0（即没有有效的区域），则 point_labels 将被设置为 0，表示没有有效的点击位置。否则，函数将在掩码中出现最频繁的标签对应的区域中随机选择一个点作为点击位置。
 def random_click(mask, point_labels = 1):
     # check if all masks are black
+    # 使用 mask.flatten() 将 mask 转换为一维数组。
+    # 通过 set 获取 mask 中所有不同的值。
+    # 使用 max 函数找到这些值中的最大值，即 mask 中出现的最高标签。
     max_label = max(set(mask.flatten()))
+    # 如果找到的最大标签是 0，这意味着所有的掩码值都是黑色（通常在掩码中，0 表示背景或无效区域）。
     if max_label == 0:
         point_labels = max_label
     # max agreement position
-    indices = np.argwhere(mask == max_label) 
+    # 将 point_labels 设置为 max_label 的值，如果所有掩码都是黑色的，point_labels 将被设置为 0。
+    # 使用 np.argwhere 函数找到 mask 中所有等于 max_label 的元素的位置。这将返回一个二维数组，其中每行是一个坐标点。
+    indices = np.argwhere(mask == max_label)
+    # 使用 np.random.randint(len(indices)) 从 indices 中随机选择一个索引。这将用于选择一个随机的点作为点击位置。
+    # 返回 point_labels 和随机选择的点的坐标。
     return point_labels, indices[np.random.randint(len(indices))]
 
 

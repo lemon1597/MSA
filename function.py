@@ -60,7 +60,7 @@ epoch_loss_values = []
 metric_values = []
 
 def train_sam(args, net: nn.Module, optimizer, train_loader,
-          epoch, writer, schedulers=None, vis = 50):
+          epoch, writer, schedulers=None, vis = 5):
     hard = 0
     epoch_loss = 0
     ind = 0
@@ -276,8 +276,8 @@ def validation_sam(args, val_loader, epoch, net: nn.Module, clean_dir=True):
                     imgs = imgs.repeat(1,3,1,1)
                     point_labels = torch.ones(imgs.size(0))
 
-                    imgs = torchvision.transforms.Resize((args.image_size,args.image_size))(imgs)
-                    masks = torchvision.transforms.Resize((args.out_size,args.out_size))(masks)
+                    imgs = torchvision.transforms.Resize((args.image_size,args.image_size))(imgs) # 1024
+                    masks = torchvision.transforms.Resize((args.out_size,args.out_size))(masks) # 256
                 
                 showp = pt
 
@@ -352,14 +352,13 @@ def validation_sam(args, val_loader, epoch, net: nn.Module, clean_dir=True):
                     tot += lossfunc(pred, masks)
 
                     '''vis images'''
-                    if ind % args.vis == 0:
-                        namecat = 'Test'
-                        for na in name[:2
-                        
-                        ]:
-                            img_name = na.split('/')[-1].split('.')[0]
-                            namecat = namecat + img_name + '+'
-                        vis_image(imgs,pred, masks, os.path.join(args.path_helper['sample_path'], namecat+'epoch+' +str(epoch) + '.jpg'), reverse=False, points=showp)
+                    if args.vis:
+                        if ind % args.vis == 0:
+                            namecat = 'Test'
+                            for na in name[:2]:
+                                img_name = na.split('/')[-1].split('.')[0]
+                                namecat = namecat + img_name + '+'
+                            vis_image(imgs,pred, masks, os.path.join(args.path_helper['sample_path'], namecat+'epoch+' +str(epoch) + '.jpg'), reverse=False, points=showp)
                     
 
                     temp = eval_seg(pred, masks, threshold)
